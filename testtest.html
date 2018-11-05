@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<div id="btn">仮ボタン</div>
+<img id="tv">
+<audio id="oto"></audio>
+<div id="title"></div>
+
+</body>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyBmADetH3q9sOwUHKQJOiZzBA4az-mXzEI",
+    authDomain: "ssplayer-4f58c.firebaseapp.com",
+    databaseURL: "https://ssplayer-4f58c.firebaseio.com",
+    projectId: "ssplayer-4f58c",
+    storageBucket: "ssplayer-4f58c.appspot.com",
+    messagingSenderId: "332347624393"
+};
+firebase.initializeApp(config);    
+
+
+
+
+
+
+
+
+
+// firebase.database().ref('users').orderByChild("photo").on('value',
+//             function(snapshot){
+//                 let objects = snapshot.val()
+//                 let keys = Object.keys(objects).map(key => objects[key])
+
+//     $("#btn").on("click",function(){
+//         var v = document.getElementById("oto");
+//             document.getElementById("tv").src= keys[0].photo;
+//             document.getElementById("oto").src = keys[0].mp3;
+//             v.play();
+//             document.getElementById("title").textContent= keys[0].koment+"/"+keys[0].username;
+//             // }, false);
+//         document.getElementById("oto").addEventListener("ended", function() { 
+//                 document.getElementById("tv").src= keys[1].photo;
+//                 document.getElementById("oto").src = keys[1].mp3;
+//                 v.play();
+//                 document.getElementById("title").textContent= keys[1].koment+"/"+keys[1].username;
+//         }, false);
+//     })
+// });
+
+
+var keys = [];//連想配列をkeysに入れる
+var currentIndex = 0;//鳴り終わったら
+var playing = false;//鳴っているかどうか
+var tv = document.getElementById("tv");
+var audio = document.getElementById("oto");
+var title = document.getElementById("title");
+
+audio.autoplay = true;//鳴っているかどうか
+
+firebase.database().ref('users').orderByChild("photo").on('value',
+            function(snapshot){
+                let objects = snapshot.val()
+                keys.push(...Object.keys(objects).map(key => objects[key]));
+});
+
+audio.addEventListener("play", function() {
+    var data = keys[currentIndex];
+    tv.src= data.photo;
+    title.textContent= data.koment+"/"+data.username;
+}, false);
+
+audio.addEventListener("ended", function() {
+    if (playing) {
+        currentIndex = (currentIndex + 1) % keys.length;
+        audio.src = keys[currentIndex].mp3;
+    }
+}, false);
+
+$("#btn").on("click",function(){
+    if (!playing) {
+        playing = true;
+        if (!audio.src) {
+            audio.src = keys[currentIndex].mp3;
+        } else {
+            audio.play();
+        }
+    } else {
+        playing = false;
+        audio.pause();
+    }
+})
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Soundscape Player</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 本体&ボタン描画スタート -->
+    <img id="hoge" src="svg/ratebase.svg" preserveAspectRatio="none" width="1140" height="auto">
+    <img id="btn_x" src="svg/btnbase.svg" preserveAspectRatio="none" width="140" height="auto">
+    <!-- <input type="text" value="75" class="dial">
+    <div class="jquery-knob-sample1">
+            <input type="text" value="75" class="dial">
+    </div> -->
+    <img id="btn_y" src="svg/btnbase.svg" width="140" height="auto">
+    <img id="btn_base" src="svg/btnbase.svg" width="76" height="auto">
+    <img id="btn_tre" src="svg/btnbase.svg" width="76" height="auto">
+    <img id="btn_autoplay" src="svg/btn_autoplay.svg" width="46" height="auto">
+    <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto">
+    <img id="btn_vol" src="svg/btn_vol.svg" width="47" height="auto">
+    <input type="range" id="volume" value="50" min="0" max="99">
+    <!-- 本体&ボタン描画おわり -->
+
+    <!-- TV部分反映スタート -->
+    <img id="tv" src="img/IMG_846011.gif">
+    <p id="title"></p>
+    現在（秒）：<span id="ichi">0</span><br>
+    全体（秒）：<span id="nagasa"></span><br>
+    <audio id="oto" preload="auto" src="mp3/noizu.m4a"></audio>
+    <!-- TV部分反映おわり -->
+
+
+    <!-- Mapスタート -->
+    <div id="myMap"></div>
+    <!-- Mapおわり -->
+
+    <img id="meter" src="svg/meter.svg" width="130" height="auto">
+    
+    <!-- 投稿フォームスタート -->
+    <div class="dialog" id="sample-dialog">
+        <div class="dialog-header">
+            <span class="dialog-title">投稿フォーム</span>
+            <button type="button" class="dialog-close">×</button>
+        </div>
+        <div class="dialog-content">
+            <p>なまえ</p>
+            <input type="text" name="name" id="name" maxlength="8" value="">
+            <p>一言コメント</p>
+            <input type="text" name="koment" id="koment" maxlength="12" value="">
+            <p>録音場所の写真</p>
+            <progress value="0" max="100" id="uploader">0%</progress>
+            <input type="file" name="photo" id="photofileButton"/>
+            <p>録音データ</p>
+            <progress value="0" max="100" id="otouploader">0%</progress>
+            <input type="file" name="mp3" id="mp3fileButton"/>
+            <!-- <input type="submit" value="実行する"> -->
+            <button class="btn-primary" id="submit" onclick="addContact()">送信</button>
+        </div>
+    </div>
+    <!-- 投稿フォームおわり -->
+
+    <!-- <button id="open-sample-dialog">ダイアログを開く</button> -->
+    <!-- <button onclick="getPosition();">位置情報を取得する</button> -->
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+<script src="https://www.bing.com/api/maps/mapcontrol?key=ApkYHBsXatdtZl0BJtsJOs_zFny9emXRglbWKsCjmti0wD7rTIWEwo9VU_MQsJWh&callback=GetMap" async defer></script>
+<script>
+    // //再生完了の表示をクリア
+	// document.getElementById("kanryou").innerHTML = "";
+	// //動画を再生
+	// v.play();
+	// //現在の再生位置（秒）を表示
+	// v.addEventListener("timeupdate", function(){
+	// 	document.getElementById("ichi").innerHTML = v.currentTime;
+	// }, false);
+	// //再生完了を知らせる
+	// v.addEventListener("ended", function(){
+	// 	document.getElementById("kanryou").innerHTML = "動画の再生が完了しました。";
+	// }, false);
+
+function playsound(){
+    audio = new Audio();
+    // audio.src = "mp3/uenokouen.m4a"
+    audio.play();
+    //users参照
+    // firebase.database().ref('users').orderByChild("photo").on('value', function(snapshot) {
+    //     //firebaseの機能を使って、取得してobjに入れる
+    //     let objects = snapshot.val()
+    //     //オブジェクトを1次元配列に arr = [{aa:aa},{aa:bb}] map関数のアロー関数
+    //     let keys = Object.keys(objects).map(key => objects[key])
+    //     // console.log(keys);
+    //     //配列をforeach文で回す
+    //     // keys.forEach((element,index) => {
+    //     // console.log(element);
+    //     //表示&再生指示
+    // //     for( let i = 0; i < 2; i++ ){
+    // //         document.getElementById("tv").src= keys[i].photo;
+    // //         audio.src = keys[i].mp3;
+    // //         document.getElementById("title").textContent= keys[i].koment+"/"+keys[i].username;
+    // // }
+        
+    //     // });
+    // });
+}
+
+function soundoff(){
+    var v = document.getElementById("oto");
+    v.pause();
+    // audio.currentTime = 0;
+    //表示&再生指示
+    document.getElementById("tv").src= "img/IMG_846011.gif";
+    // audio.src = element.mp3;
+    document.getElementById("title").textContent= "/";
+        
+
+}
+
+    
+    
+let autoplayclick = true;//クリックカウント
+let saiseiflg = 0;
+let recclick = true;//クリックカウント
+var v = document.getElementById("oto");
+
+//autoplayイベント
+$("#btn_autoplay").on("click",function(){
+    if(autoplayclick==true){
+        $("#btn_autoplay").offset(function(index, coords){
+        return {
+            top: coords.top + -25,
+            };
+        });
+        autoplayclick = false;
+
+        if(saiseiflg==0){
+        // audio = new Audio();
+        // var v = document.getElementById("oto");
+        // v.play();
+        firebase.database().ref('users').orderByChild("photo").on('value',
+        function(snapshot){
+            let objects = snapshot.val()
+            let keys = Object.keys(objects).map(key => objects[key])
+                document.getElementById("tv").src= keys[0].photo;
+                document.getElementById("oto").src = keys[0].mp3;
+                v.play();
+                document.getElementById("title").textContent= keys[0].koment+"/"+keys[0].username;
+            // v.loop = true;//これでrリピート再生が出来る！！
+            saiseiflg = 1;
+            flag0 = function(){
+                saiseiflg = 0;
+            }
+            setTimeout(flag0)
+        });
+        var v = document.getElementById("oto");
+        v.onended = function() {
+        console.log('Your audio has finished playing');
+        $("#btn_autoplay").offset(function(index, coords){
+        return {
+            top: coords.top + 25,
+            };
+        });
+            saiseiflg = 1;
+            flag0 = function(){
+                saiseiflg = 0;
+            }
+            setTimeout(flag0)
+        
+        autoplayclick = true;
+        }
+        setTimeout(2000);
+
+    
+    }
+        
+    }else{
+        $("#btn_autoplay").offset(function(index, coords){
+        return {
+            top: coords.top + 25,
+            };
+        });
+        autoplayclick = true;
+        soundoff()
+        // audio.pause();
+        // audio.currentTime = 0;
+        // console.log(audio);
+        }
+});
+
+// //autoplayイベント
+// $("#btn_autoplay").on("click",function(){
+//     if(autoplayclick==true){
+//         $("#btn_autoplay").offset(function(index, coords){
+//         return {
+//             top: coords.top + -25,
+//             };
+//         });
+//         autoplayclick = false;
+
+//         if(saiseiflg==0){
+//         // audio = new Audio();
+//         // var v = document.getElementById("oto");
+//         // v.play();
+//         firebase.database().ref('users').orderByChild("photo").on('value',
+//         function(snapshot){
+//             let objects = snapshot.val()
+//             let keys = Object.keys(objects).map(key => objects[key])
+//             var v = document.getElementById("oto");
+//             for(let i = 0; i < 2; i++ ){
+//                 v.onended = function() {
+//                     console.log('Your audio has finished playing');
+                    
+                
+//                 document.getElementById("tv").src= keys[i].photo;
+//                 document.getElementById("oto").src = keys[i].mp3;
+//                 v.play()
+//                 document.getElementById("title").textContent= keys[i].koment+"/"+keys[i].username;
+//             };
+//                 document.getElementById("tv").src= keys[0].photo;
+//                 document.getElementById("oto").src = keys[0].mp3;
+//                 v.play()
+//                 document.getElementById("title").textContent= keys[0].koment+"/"+keys[0].username;
+//             }
+//             // v.loop = true;//これでrリピート再生が出来る！！
+//             saiseiflg = 1;
+//             flag0 = function(){
+//                 saiseiflg = 0;
+//             }
+//             setTimeout(flag0)
+//         });
+//         var v = document.getElementById("oto");
+//         v.onended = function() {
+//         console.log('Your audio has finished playing');
+//         $("#btn_autoplay").offset(function(index, coords){
+//         return {
+//             top: coords.top + 25,
+//             };
+//         });
+//             saiseiflg = 1;
+//             flag0 = function(){
+//                 saiseiflg = 0;
+//             }
+//             setTimeout(flag0)
+        
+        
+//         autoplayclick = true;
+//         }
+//         setTimeout(2000);
+
+    
+//     }
+        
+//     }else{
+//         $("#btn_autoplay").offset(function(index, coords){
+//         return {
+//             top: coords.top + 25,
+//             };
+//         });
+//         autoplayclick = true;
+//         soundoff()
+//         // audio.pause();
+//         // audio.currentTime = 0;
+//         // console.log(audio);
+//         }
+// });
+
+//音量調整ボタン
+var volume = document.getElementById('volume');
+
+volume.addEventListener('change', function () {
+  var volumeValue = (volume.value.length == 1) ? '0.0' + volume.value : '0.' +
+    volume.value;
+  v.volume = volumeValue;
+}, false);
+
+
+
+
+
+//REC投稿イベント
+$("#btn_rec").on("click",function(){
+    if(recclick==true){
+        $("#btn_rec").offset(function(index, coords){
+        return {
+            top: coords.top + -25,
+            };
+        });
+        recclick = false;
+        getPosition();
+        //leftの値 = (ウィンドウ幅 -コンテンツ幅) ÷ 2
+        var leftPosition = (($(window).width() - $("#sample-dialog").outerWidth(true)) / 2);
+        //CSSを変更
+        $("#sample-dialog").css({"left": leftPosition + "px"});
+        //ダイアログを表示する
+        $("#sample-dialog").show();
+        
+        //閉じるボタンで非表示
+        $(".dialog-close").on("click", function(){
+        $(this).parents(".dialog").hide();
+        });
+    }else{
+        $("#btn_rec").offset(function(index, coords){
+        return {
+            top: coords.top + 25,
+            };
+        });
+        recclick = true;
+    }
+});
+
+//firebaseへデータ送信
+function addContact(){
+//users参照
+    firebase.database().ref('users/').push({
+        ido:ido,
+        keido:keido,
+        username: $('#name').val(),
+        koment:$('#koment').val(),
+        mp3:mp3url,
+        photo:PhotoUrl
+    });
+};
+
+
+let PhotoUrl = "";
+console.log(PhotoUrl);
+
+
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyBmADetH3q9sOwUHKQJOiZzBA4az-mXzEI",
+    authDomain: "ssplayer-4f58c.firebaseapp.com",
+    databaseURL: "https://ssplayer-4f58c.firebaseio.com",
+    projectId: "ssplayer-4f58c",
+    storageBucket: "ssplayer-4f58c.appspot.com",
+    messagingSenderId: "332347624393"
+};
+firebase.initializeApp(config);
+
+// Firebaseアップロードする方法とダウンロードする方法
+var uploader = document.getElementById("uploader");
+var photofileButton = document.getElementById("photofileButton");
+var mp3fileButton = document.getElementById("mp3fileButton");
+var downloadButton = document.getElementById("downloadButton");
+
+// var imgRef =firebase.storage().ref("sweet_gifs/azabu.jpg");
+//     downloadButton.addEventListener("click",function(){
+//         imgRef.getDownloadURL().then(function(url){
+//             // console.log("berhasill downlord");
+//             // console.log(url);
+//         });
+//     });
+
+
+photofileButton.addEventListener("change", function(e){
+    var file = e.target.files[0];
+    var storageRef = firebase.storage().ref("sweet_gifs/"+file.name);
+    var task = storageRef.put(file);
+    task.on("state_changed",
+    
+    function progress(snapshot){
+        var percentage = (snapshot.bytesTransferred /
+        snapshot.totalBytes) * 100;
+        uploader.value = percentage;
+    },
+    function error(err){
+
+    },
+    function complete(){
+        task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            PhotoUrl = downloadURL;
+            // $("#fileButton").val(downloadURL);
+        // console.log('File available at', downloadURL);
+        });
+    });
+});
+
+mp3fileButton.addEventListener("change", function(e){
+    var file = e.target.files[0];
+    var storageRef = firebase.storage().ref("sweet_gifs/"+file.name);
+    var task = storageRef.put(file);
+    task.on("state_changed",
+    
+    function progress(snapshot){
+        var percentage = (snapshot.bytesTransferred /
+        snapshot.totalBytes) * 100;
+        otouploader.value = percentage;
+    },
+    function error(err){
+
+    },
+    function complete(){
+        task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            mp3url = downloadURL;
+            // $("#fileButton").val(downloadURL);
+        // console.log('File available at', downloadURL);
+        });
+    });
+});
+
+
+// //緯度軽度
+// // Geolocation APIに対応している
+// if (navigator.geolocation) {
+//     alert("この端末では位置情報が取得できます");
+// // Geolocation APIに対応していない
+// } else {
+//     alert("この端末では位置情報が取得できません");
+// }
+
+//現在地
+var lat = 35.3622222, lon = 138.7313889;
+var map = null;
+let ido = "";
+let keido = "";
+
+// 現在地取得処理
+function getPosition() {
+    // 現在地を取得
+    navigator.geolocation.getCurrentPosition(
+    // 取得成功した場合
+    function(position) {
+        ido = position.coords.latitude;
+        keido = position.coords.longitude;
+        // alert("緯度:"+position.coords.latitude+",経度"+position.coords.longitude);
+        console.log(ido);
+    },
+    // 取得失敗した場合
+    function(error) {
+        switch(error.code) {
+        case 1: //PERMISSION_DENIED
+            alert("位置情報の利用が許可されていません");
+            break;
+        case 2: //POSITION_UNAVAILABLE
+            alert("現在位置が取得できませんでした");
+            break;
+        case 3: //TIMEOUT
+            alert("タイムアウトになりました");
+            break;
+        default:
+            alert("その他のエラー(エラーコード:"+error.code+")");
+            break;
+        }
+    });
+}
+
+
+
+function GetMap() {
+    var map = new Microsoft.Maps.Map(document.getElementById('myMap'), { 
+    /* すでにURLに渡されている場合は、資格情報を設定する必要はありません */
+        zoom: 3});
+    Microsoft.Maps.loadModule('Microsoft.Maps.Clustering', function () {
+        //マップビューで3000個のランダムなプッシュピンを生成します。 
+        var pins = Microsoft.Maps.TestDataGenerator.getPushpins(10, map.getBounds());
+        //オプションを使用してClusterLayerを作成し、マップに追加します.
+        clusterLayer = new Microsoft.Maps.ClusterLayer(pins, {
+            clusteredPinCallback: createCustomClusteredPin,
+            gridSize: 80
+        });
+        map.layers.insert(clusterLayer);
+    });
+}
+function createCustomClusteredPin(cluster) {
+	//最小クラスタ半径の変数と円の輪郭領域の幅を定義します。
+	var minRadius = 12;
+    var outlineWidth = 7;
+    //クラスタ内のプッシュピンの数を取得する
+    var clusterSize = cluster.containedPushpins.length;
+    //対数スケールを使用して、クラスタ内のプッシュピンの数に基づいてクラスタの半径を計算します
+    var radius = Math.log(clusterSize) / Math.log(10) * 5 + minRadius;
+    //デフォルトのクラスタの色は赤です.
+    var fillColor = 'rgba(255, 40, 40, 0.5)';
+    if(clusterSize < 10) {
+        //ッシュピンが10個未満の場合は、クラスタを緑色にします。
+        fillColor = 'rgba(20, 180, 20, 0.5)';
+    } else if (clusterSize < 100) {
+        //クラスタに10〜99個のプッシュピンがある場合は、クラスタを黄色にします。
+        fillColor = 'rgba(255, 210, 40, 0.5)';
+    }
+	//指定された半径と色で、2つの円からなるSVG文字列をもう一方の上に作成します.
+	var svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="', (radius * 2), '" height="', (radius * 2), '">',
+        '<circle cx="', radius, '" cy="', radius, '" r="', radius, '" fill="', fillColor, '"/>',
+        '<circle cx="', radius, '" cy="', radius, '" r="', radius - outlineWidth, '" fill="', fillColor, '"/>',
+        '</svg>'];
+    //生成されたSVGとその中心にアンカーを使用してクラスタ化された押しピンをカスタマイズする.
+    cluster.setOptions({
+        icon: svg.join(''),
+        anchor: new Microsoft.Maps.Point(radius, radius),
+        textOffset: new Microsoft.Maps.Point(0, radius - 8) 
+        //テキストの高さを補うために8を引いてください。
+    });
+}
+
+
+//地図にピンを立てる処理
+// function GetMap() {
+//     const map = new Microsoft.Maps.Map('#myMap', {
+//         center: new Microsoft.Maps.Location(35.6811, 139.6994), 
+//         center: new Microsoft.Maps.Location(35.6820, 139.6980), 
+//         mapTypeId: Microsoft.Maps.MapTypeId.canvasLight,//
+//         zoom: 16
+//     });
+//     let center = map.getCenter();
+//     let pin = new Microsoft.Maps.Pushpin(center,{
+//         color: "red",
+//         draggable: true,
+//         enableClickedStyle: true,
+//         visible: true
+//     });
+//     map.entities.push(pin);
+// }
+
+// function drawPushpin() {
+//     if (setMode('pushpin')) {
+//         //Add a click event to the map to add pushpins.
+//         events.push(Microsoft.Maps.Events.addHandler(map, 'click', function (e) {
+//             currentShape = new Microsoft.Maps.Pushpin(e.location, {
+//                 color: style.color
+//             });
+//             drawingLayer.add(currentShape);                
+//         }));
+//     }
+// }
+
+
+
+
+
+
+
+// 緯度:35.6811648,経度139.6994909
+
+
+// $("#btn_y").on("click",function(){
+//     console.log("Yクリックされた");
+// });
+</script>
+
+</html>

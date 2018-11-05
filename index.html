@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Soundscape Player</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="init()">
+    <!-- 本体&ボタン描画スタート -->
+    <img id="hoge" src="svg/ratebase.svg" preserveAspectRatio="none" width="1140" height="auto">
+    <img id="btn_x" src="svg/btnbase.svg" preserveAspectRatio="none" width="140" height="auto">
+    <!-- <input type="text" value="75" class="dial">
+    <div class="jquery-knob-sample1">
+            <input type="text" value="75" class="dial">
+    </div> -->
+    <img id="btn_y" src="svg/btnbase.svg" width="140" height="auto">
+    <img id="btn_base" src="svg/btnbase.svg" width="76" height="auto">
+    <img id="btn_tre" src="svg/btnbase.svg" width="76" height="auto">
+    <img id="btn_autoplay" src="svg/btn_autoplay.svg" width="46" height="auto">
+    <!-- <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto"> -->
+    <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto" onClick="location.href='rec.html'" value="Jump">
+    <img id="btn_vol" src="svg/btn_vol.svg" width="47" height="auto">
+    <input type="range" id="volume" value="50" min="0" max="99">
+    <!-- 本体&ボタン描画おわり -->
+
+    <!-- TV部分反映スタート -->
+    <img id="tv" src="img/IMG_846011.gif">
+    <p id="title"></p>
+    現在（秒）：<span id="ichi">0</span><br>
+    全体（秒）：<span id="nagasa"></span><br>
+    <!-- <audio id="oto" preload="auto" src="mp3/noizu.m4a"></audio> -->
+    <audio id="oto" controls preload="none" controls>
+        <source src="">
+    </audio>
+    <!-- TV部分反映おわり -->
+
+    <!-- Mapスタート -->
+    <div id="myMap"></div>
+    <!-- Mapおわり -->
+
+    <img id="meter" src="svg/meter.svg" width="130" height="auto">
+    
+    <!-- 投稿フォームスタート -->
+    <div class="dialog" id="sample-dialog">
+        <div class="dialog-header">
+            <span class="dialog-title">投稿フォーム</span>
+            <button type="button" class="dialog-close">×</button>
+        </div>
+        <div class="dialog-content">
+            <p>なまえ</p>
+            <input type="text" name="name" id="name" maxlength="8" value="">
+            <p>一言コメント</p>
+            <input type="text" name="koment" id="koment" maxlength="12" value="">
+            <p>録音場所の写真</p>
+            <progress value="0" max="100" id="uploader">0%</progress>
+            <input type="file" name="photo" id="photofileButton" accept="image/*"/>
+            <p>録音データ</p>
+            <progress value="0" max="100" id="otouploader">0%</progress>
+            <input type="file" name="mp3" id="mp3fileButton" accept="audio/*" capture="microphone"/>
+            <!-- <input type="submit" value="実行する"> -->
+            <button class="btn-primary" id="submit" onclick="addContact()">送信</button>
+        </div>
+    </div>
+    <!-- 投稿フォームおわり -->
+
+    <!-- <button id="open-sample-dialog">ダイアログを開く</button> -->
+    <!-- <button onclick="getPosition();">位置情報を取得する</button> -->
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/index.js"></script>
+<script src="https://www.bing.com/api/maps/mapcontrol?key=ApkYHBsXatdtZl0BJtsJOs_zFny9emXRglbWKsCjmti0wD7rTIWEwo9VU_MQsJWh&callback=GetMap" async defer></script>
+
+
+</html>

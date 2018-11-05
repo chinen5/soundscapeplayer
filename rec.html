@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dialog" id="sample-dialog">
+        <div class="dialog-header">
+            <span class="dialog-title">投稿フォーム</span>
+            <button type="button" class="dialog-close">×</button>
+        </div>
+        <div class="dialog-content">
+            <p>なまえ</p>
+            <input type="text" name="name" id="name" maxlength="8" value="">
+            <p>一言コメント</p>
+            <input type="text" name="koment" id="koment" maxlength="12" value="">
+            <p>録音場所の写真</p>
+            <progress value="0" max="100" id="uploader">0%</progress>
+            <input type="file" name="photo" id="photofileButton" accept="image/*"/>
+            <p>録音データ</p>
+            <progress value="0" max="100" id="otouploader">0%</progress>
+            <input type="file" name="mp3" id="mp3fileButton" accept="audio/*" capture="microphone"/>
+            <!-- <input type="submit" value="実行する"> -->
+            <button class="btn-primary" id="submit" onclick="addContact()">送信</button>
+        </div>
+    </div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/index.js"></script>
+<script src="https://www.bing.com/api/maps/mapcontrol?key=ApkYHBsXatdtZl0BJtsJOs_zFny9emXRglbWKsCjmti0wD7rTIWEwo9VU_MQsJWh&callback=GetMap" async defer></script>
+</html>

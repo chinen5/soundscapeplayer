@@ -1,0 +1,136 @@
+@charset "utf-8";
+
+body{
+    font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "ＭＳ ゴシック", sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    user-select: none;
+    background-color: black;
+    /* color: #fff; */
+}
+
+#hoge{
+    /* position: relative; */
+    padding: 50px;
+    position: relative;
+    /* top: 50px;
+    left: 50px; */
+    /* width:100%;
+    max-width: 100%;
+    height: auto; */
+    /* background-size: cover */
+}
+
+#title{
+    color: #fff;
+    top: 390px;
+    left: 180px;
+    position: absolute;
+}
+
+#tv{
+    position: absolute;
+    top: 160px;
+    left: 163px;
+    width: 340px;
+    height: 250px;
+}
+
+#myMap{
+    position: absolute;
+    top: 165px;
+    left: 550px;
+    width: 523px;
+    height: 238px;
+}
+
+#btn_x{
+    position: absolute;
+    top: 555px;
+    left: 572px;
+}
+
+#btn_y{
+    position: absolute;
+    top: 555px;
+    left: 807px;
+}
+
+#btn_base{
+    position: absolute;
+    top: 538px;
+    left: 292px;
+}
+
+#btn_tre{
+    position: absolute;
+    top: 538px;
+    left: 417px;
+}
+
+#btn_autoplay{
+    position: absolute;
+    top: 710px;
+    left: 305px;
+}
+
+#btn_rec{
+    position: absolute;
+    top: 710px;
+    left: 427px;
+}
+
+#btn_vol{
+    position: absolute;
+    top: 701px;
+    left: 1005px;
+}
+
+#meter{
+    position: absolute;
+    top: 302px;
+    left: 976px;
+}
+
+.dialog {
+    overflow: hidden;
+    position: absolute;
+    top: 30%;
+    height: auto;
+    width: 300px;
+    display: none;
+    border:1px solid #aaa;
+    z-index:1000;
+  }
+  .dialog-header {
+    border: 1px solid #aaa;
+    background: #cccccc;
+    color: #222222;
+    font-weight: bold;
+    overflow: hidden;
+    padding:5px;
+  }
+  .dialog-title {
+    float: left;
+  }
+  .dialog-close {
+    float: right;
+    border: 1px solid #d3d3d3;
+    background: #e6e6e6;
+    font-weight: normal;
+    color: #555555;
+  }
+  .dialog-content {
+    position: relative;
+    border: 0;
+    padding: .5em 1em;
+    background: #fff;
+    overflow: auto;
+    width: auto;
+    height: auto;
+  }
+
+
+#sample-dialog{
+    background-color: #fff;
+}
