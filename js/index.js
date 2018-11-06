@@ -7,8 +7,8 @@ var config = {
     storageBucket: "ssplayer-4f58c.appspot.com",
     messagingSenderId: "332347624393"
 };
-firebase.initializeApp(config);    
- 
+firebase.initializeApp(config);
+
 
 
 //autoplay再生イベント
@@ -19,6 +19,8 @@ var playing = false;//鳴っているかどうか
 var tv = document.getElementById("tv");
 var audio = document.getElementById("oto");
 var title = document.getElementById("title");
+let playido = "";
+let playkeido = "";
 
 // var autoplay = $("#btn_autoplay").offset().top;
 
@@ -32,9 +34,29 @@ firebase.database().ref('users').orderByChild("photo").on('value',
 
 audio.addEventListener("play", function() {
     var data = keys[currentIndex];
+    console.log(data);
     tv.src= data.photo;
     title.textContent= data.koment+"/"+data.username;
+    playido = data.ido;
+    playkeido = data.keido;
+    var loc = new Microsoft.Maps.Location(playido, playkeido);
+    map.entities.remove(playpin);
+    var playpin = new Microsoft.Maps.Pushpin(loc, {
+        icon: "img/point.png",
+        anchor: new Microsoft.Maps.Point(32, 32),
+        'draggable': false
+    });
+    map.entities.push(playpin);
+
+    map.setView({ 
+        mapTypeId: Microsoft.Maps.MapTypeId.canvasLight,
+        center: new Microsoft.Maps.Location(playido,playkeido ),
+        zoom: 15
+    }); 
+    // console.log(playido);
 }, false);
+
+// console.log(playido);
 
 audio.addEventListener("ended", function() {
     if (playing) {
@@ -53,7 +75,6 @@ $("#btn_autoplay").on("click",function(){
             });
         if (!audio.src) {
             audio.src = keys[currentIndex].mp3;
-            console.log("hakka");
         } else {
             audio.play();
         }
@@ -69,9 +90,42 @@ $("#btn_autoplay").on("click",function(){
     }
 })
 
-    
-    
-    
+let btnclick = 0;
+
+//クリックして再生の場合
+$("#btn_x").on("click",btnclick++,function(){
+    if (btnclick==1) {//再生していなければ
+    // if (!playing) {//再生していなければ
+        playing = true;
+        // $("#btn_x").offset(function(index, coords){
+        //     return {
+        //         top: coords.top + -25,
+        //         };
+        //     });
+        if (!audio.src) {
+            audio.src = keys[currentIndex].mp3;
+            console.log(btnclick);
+        } else {
+            audio.play()
+            // btnclick=2;
+        }
+    }else if(btnclick==2){
+        audio.src = keys[curentIndex++].mp3;
+    }
+})
+
+//止める
+$("#btn_base").on("click",function(){
+        playing = false;
+        audio.pause();
+        // $("#btn_autoplay").offset(function(index, coords){
+        //     // return {
+        //     //     top: coords.top + 25,
+        //     //     };
+        // });
+});
+
+
 //音量調整ボタン
 var volume = document.getElementById('volume');
 
@@ -80,8 +134,6 @@ volume.addEventListener('change', function () {
     volume.value;
     v.volume = volumeValue;
 }, false);
-    
-    
     
     
     
@@ -119,15 +171,6 @@ $("#btn_rec").on("click",function(){
 
 
 
-
-
-
-
-
-
-
-
-    
 
 //firebaseへデータ送信
 function addContact(){
@@ -205,6 +248,9 @@ mp3fileButton.addEventListener("change", function(e){
 let ido = "";
 let keido = "";
 
+// let playido = "";
+// let playkeido = "";
+
 // 現在地取得処理
 function getPosition() {
     // 現在地を取得
@@ -214,7 +260,7 @@ function getPosition() {
         ido = position.coords.latitude;
         keido = position.coords.longitude;
         // alert("緯度:"+position.coords.latitude+",経度"+position.coords.longitude);
-        console.log(ido);
+        // console.log(ido);
     },
     // 取得失敗した場合
     function(error) {
@@ -234,36 +280,26 @@ function getPosition() {
         }
     });
 }
-    
 
 
     
 // 地図にピンを立てる処理自分のピンがあるところにするとか！！！！
 function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {
-        center: new Microsoft.Maps.Location(35.6811, 139.6994), 
+        center: new Microsoft.Maps.Location(35.3622222, 138.7313889), 
         mapTypeId: Microsoft.Maps.MapTypeId.canvasLight,//
         zoom: 16
     });
     // MAP 中 ⼼ 座 標 を 取得 
     let center = map.getCenter();
-    //PushPin の 設 定 
-    let pin = new Microsoft.Maps.Pushpin(center,{
-        icon: "img/neko.png",
-        // color: "red",
-        draggable: true,
-        enableClickedStyle: true,
-        visible: true
-    });
-    map.entities.push(pin);
-    // // MAP 中 ⼼ 座 標 を 取得 
-    // let center = map.getCenter();
     // //PushPin の 設 定 
     // let pin = new Microsoft.Maps.Pushpin(center,{
-    //     color: "red",
+    //     icon: "img/point.png",
+    //     // color: "red",
     //     draggable: true,
     //     enableClickedStyle: true,
-    //     visible: true
+    //     visible: true,
+    //     anchor: new Microsoft.Maps.Point(2.5, 2.5)//
     // });
     // map.entities.push(pin);
 }
@@ -277,12 +313,11 @@ function init() {
 
         for(let i = 0; i<keys.length; i++){
             let point = new Microsoft.Maps.Location(keys[i].ido, keys[i].keido);
-            let pin = new Microsoft.Maps.Pushpin(point, { color: "red",'draggable': false });
-            map.entities.push(pin);
+            let livepin = new Microsoft.Maps.Pushpin(point, { color: "red",'draggable': false });
+            map.entities.push(livepin);
         }
     });
 }
-console.log(ido);
     
 function beam(){
     if(keys[i].ido == newido){

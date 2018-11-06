@@ -20,8 +20,8 @@
     <img id="btn_base" src="svg/btnbase.svg" width="76" height="auto">
     <img id="btn_tre" src="svg/btnbase.svg" width="76" height="auto">
     <img id="btn_autoplay" src="svg/btn_autoplay.svg" width="46" height="auto">
-    <!-- <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto"> -->
-    <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto" onClick="location.href='rec.html'" value="Jump">
+    <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto">
+    <!-- <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto" onClick="location.href='rec.html'" value="Jump"> -->
     <img id="btn_vol" src="svg/btn_vol.svg" width="47" height="auto">
     <input type="range" id="volume" value="50" min="0" max="99">
     <!-- 本体&ボタン描画おわり -->
@@ -59,8 +59,7 @@
             <input type="file" name="photo" id="photofileButton" accept="image/*"/>
             <p>録音データ</p>
             <progress value="0" max="100" id="otouploader">0%</progress>
-            <input type="file" name="mp3" id="mp3fileButton" accept="audio/*" capture="microphone"/>
-            <!-- <input type="submit" value="実行する"> -->
+            <input type="file" name="mp3" id="mp3fileButton" accept="audio/mp3" capture="microphone"/>
             <button class="btn-primary" id="submit" onclick="addContact()">送信</button>
         </div>
     </div>
