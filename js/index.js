@@ -15,7 +15,8 @@ firebase.initializeApp(config);
 let recclick = true;//クリックカウント
 var keys = [];//連想配列をkeysに入れる
 var currentIndex = 0;//鳴り終わったら
-var playing = false;//鳴っているかどうか
+var autoplaying = false;//オートプレイ鳴っているかどうか
+var playing = false;//通常のプレイ鳴っているかどうか
 var tv = document.getElementById("tv");
 var audio = document.getElementById("oto");
 var title = document.getElementById("title");
@@ -37,6 +38,8 @@ audio.addEventListener("play", function() {
     console.log(data);
     tv.src= data.photo;
     title.textContent= data.koment+"/"+data.username;
+
+    //地図連動↓
     playido = data.ido;
     playkeido = data.keido;
     var loc = new Microsoft.Maps.Location(playido, playkeido);
@@ -47,7 +50,6 @@ audio.addEventListener("play", function() {
         'draggable': false
     });
     map.entities.push(playpin);
-
     map.setView({ 
         mapTypeId: Microsoft.Maps.MapTypeId.canvasLight,
         center: new Microsoft.Maps.Location(playido,playkeido ),
@@ -59,15 +61,16 @@ audio.addEventListener("play", function() {
 // console.log(playido);
 
 audio.addEventListener("ended", function() {
-    if (playing) {
+    if (autoplaying) {
         currentIndex = (currentIndex + 1) % keys.length;//再生が終わったら
         audio.src = keys[currentIndex].mp3;//１から再生
     }
 }, false);
 
 $("#btn_autoplay").on("click",function(){
-    if (!playing) {//再生していなければ
-        playing = true;
+    if (!autoplaying) {//再生していなければ
+        autoplaying = true;
+        playing = false;
         $("#btn_autoplay").offset(function(index, coords){
             return {
                 top: coords.top + -25,
@@ -79,7 +82,7 @@ $("#btn_autoplay").on("click",function(){
             audio.play();
         }
     } else {
-        playing = false;
+        autoplaying = false;
         audio.pause();
         $("#btn_autoplay").offset(function(index, coords){
             return {
@@ -94,9 +97,11 @@ let btnclick = 0;
 
 //クリックして再生の場合
 $("#btn_x").on("click",btnclick++,function(){
-    if (btnclick==1) {//再生していなければ
+    if (!playing) {//再生していなければ
     // if (!playing) {//再生していなければ
         playing = true;
+        autoplaying = false;
+        // $("#btn_autoplay").prop("disabled", true);
         // $("#btn_x").offset(function(index, coords){
         //     return {
         //         top: coords.top + -25,
@@ -107,6 +112,7 @@ $("#btn_x").on("click",btnclick++,function(){
             console.log(btnclick);
         } else {
             audio.play()
+            $("#btn_autoplay").prop("disabled", false);
             // btnclick=2;
         }
     }else if(btnclick==2){
@@ -123,6 +129,13 @@ $("#btn_base").on("click",function(){
         //     //     top: coords.top + 25,
         //     //     };
         // });
+});
+
+
+//スキップ
+$("#btn_y").on("click",function(){
+    currentIndex = (currentIndex + 1) % keys.length;//再生が終わったら
+    audio.src = keys[currentIndex].mp3;//１から再生
 });
 
 

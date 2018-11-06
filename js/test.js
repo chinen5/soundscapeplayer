@@ -30,28 +30,31 @@ audio.addEventListener("ended", function() {
     }
 }, false);
 
-$("#btn_autoplay").on("click",function(){
+//クリックして再生の場合
+$("#btn_x").on("click",function(){
     if (!playing) {//再生していなければ
         playing = true;
-        $("#btn_autoplay").offset(function(index, coords){
-            return {
-                top: coords.top + -25,
-                };
-            });
+        // $("#btn_x").offset(function(index, coords){
+        //     return {
+        //         top: coords.top + -25,
+        //         };
+        //     });
         if (!audio.src) {
             audio.src = keys[currentIndex].mp3;
             console.log("hakka");
         } else {
             audio.play();
         }
-    } else {
+    } 
+})
+
+//止める
+$("#btn_base").on("click",function(){
         playing = false;
         audio.pause();
-        $("#btn_autoplay").offset(function(index, coords){
-            return {
-                top: coords.top + 25,
-                };
-        });
-        // $('btn_autoplay').offset({top: -25});
-    }
-})
+        // $("#btn_autoplay").offset(function(index, coords){
+        //     // return {
+        //     //     top: coords.top + 25,
+        //     //     };
+        // });
+});
