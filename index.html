@@ -10,19 +10,17 @@
 </head>
 <body onload="init()">
     <!-- 本体&ボタン描画スタート -->
-    <img id="hoge" src="svg/ratebase.svg" preserveAspectRatio="none" width="1140" height="auto">
-    <img id="btn_x" src="svg/btnbase.svg" preserveAspectRatio="none" width="140" height="auto">
-    <!-- <input type="text" value="75" class="dial">
-    <div class="jquery-knob-sample1">
-            <input type="text" value="75" class="dial">
-    </div> -->
-    <img id="btn_y" src="svg/btnbase.svg" width="140" height="auto">
-    <img id="btn_base" src="svg/btnbase.svg" width="76" height="auto">
-    <img id="btn_tre" src="svg/btnbase.svg" width="76" height="auto">
+    <img id="hoge" src="svg/newbase.svg" preserveAspectRatio="none" width="1140" height="auto">
+    <img id="play_b" src="svg/play.svg" preserveAspectRatio="none" width="40" height="auto">
+    <img id="next_b" src="svg/next.svg" width="40" height="auto">
+    <img id="pause_b" src="svg/pause.svg" width="40" height="auto">
+    <img id="rev_b" src="svg/rev.svg" width="40" height="auto">
+    <img id="rec" src="svg/rec.svg" width="40" height="auto" >
+    <img id="repert_b" src="svg/repert.svg" width="40" height="auto">
     <img id="btn_autoplay" src="svg/btn_autoplay.svg" width="46" height="auto">
-    <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto">
+    <img id="power_b" src="svg/btn_rec.svg" width="46" height="auto">
     <!-- <img id="btn_rec" src="svg/btn_rec.svg" width="46" height="auto" onClick="location.href='rec.html'" value="Jump"> -->
-    <img id="btn_vol" src="svg/btn_vol.svg" width="47" height="auto">
+    <!-- <img id="btn_vol" src="svg/vol.svg" width="22" height="auto"> -->
     <input type="range" id="volume" value="50" min="0" max="99">
     <!-- 本体&ボタン描画おわり -->
 
@@ -40,33 +38,7 @@
     <!-- Mapスタート -->
     <div id="myMap"></div>
     <!-- Mapおわり -->
-
-    <img id="meter" src="svg/meter.svg" width="130" height="auto">
-    
-    <!-- 投稿フォームスタート -->
-    <div class="dialog" id="sample-dialog">
-        <div class="dialog-header">
-            <span class="dialog-title">投稿フォーム</span>
-            <button type="button" class="dialog-close">×</button>
-        </div>
-        <div class="dialog-content">
-            <p>なまえ</p>
-            <input type="text" name="name" id="name" maxlength="8" value="">
-            <p>一言コメント</p>
-            <input type="text" name="koment" id="koment" maxlength="12" value="">
-            <p>録音場所の写真</p>
-            <progress value="0" max="100" id="uploader">0%</progress>
-            <input type="file" name="photo" id="photofileButton" accept="image/*"/>
-            <p>録音データ</p>
-            <progress value="0" max="100" id="otouploader">0%</progress>
-            <input type="file" name="mp3" id="mp3fileButton" accept="audio/mp3" capture="microphone"/>
-            <button class="btn-primary" id="submit" onclick="addContact()">送信</button>
-        </div>
     </div>
-    <!-- 投稿フォームおわり -->
-
-    <!-- <button id="open-sample-dialog">ダイアログを開く</button> -->
-    <!-- <button onclick="getPosition();">位置情報を取得する</button> -->
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>

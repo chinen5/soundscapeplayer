@@ -42,14 +42,14 @@ audio.addEventListener("play", function() {
     //地図連動↓
     playido = data.ido;
     playkeido = data.keido;
-    var loc = new Microsoft.Maps.Location(playido, playkeido);
-    map.entities.remove(playpin);
-    var playpin = new Microsoft.Maps.Pushpin(loc, {
-        icon: "img/point.png",
-        anchor: new Microsoft.Maps.Point(32, 32),
-        'draggable': false
-    });
-    map.entities.push(playpin);
+    // var loc = new Microsoft.Maps.Location(playido, playkeido);
+    // map.entities.remove(playpin);
+    // var playpin = new Microsoft.Maps.Pushpin(loc, {
+    //     icon: "img/point.png",
+    //     anchor: new Microsoft.Maps.Point(32, 32),
+    //     'draggable': false
+    // });
+    // map.entities.push(playpin);
     map.setView({ 
         mapTypeId: Microsoft.Maps.MapTypeId.canvasLight,
         center: new Microsoft.Maps.Location(playido,playkeido ),
@@ -73,7 +73,7 @@ $("#btn_autoplay").on("click",function(){
         playing = false;
         $("#btn_autoplay").offset(function(index, coords){
             return {
-                top: coords.top + -25,
+                top: coords.top + -43,
                 };
             });
         if (!audio.src) {
@@ -86,7 +86,7 @@ $("#btn_autoplay").on("click",function(){
         audio.pause();
         $("#btn_autoplay").offset(function(index, coords){
             return {
-                top: coords.top + 25,
+                top: coords.top + 43,
                 };
         });
         // $('btn_autoplay').offset({top: -25});
@@ -96,7 +96,7 @@ $("#btn_autoplay").on("click",function(){
 let btnclick = 0;
 
 //クリックして再生の場合
-$("#btn_x").on("click",btnclick++,function(){
+$("#play_b").on("click",btnclick++,function(){
     if (!playing) {//再生していなければ
     // if (!playing) {//再生していなければ
         playing = true;
@@ -120,8 +120,8 @@ $("#btn_x").on("click",btnclick++,function(){
     }
 })
 
-//止める
-$("#btn_base").on("click",function(){
+//クリックして止める
+$("#pause_b").on("click",function(){
         playing = false;
         audio.pause();
         // $("#btn_autoplay").offset(function(index, coords){
@@ -133,9 +133,20 @@ $("#btn_base").on("click",function(){
 
 
 //スキップ
-$("#btn_y").on("click",function(){
+$("#next_b").on("click",function(){
     currentIndex = (currentIndex + 1) % keys.length;//再生が終わったら
     audio.src = keys[currentIndex].mp3;//１から再生
+});
+
+//もどる
+$("#rev_b").on("click",function(){
+    currentIndex = (currentIndex - 1) % keys.length;//再生が終わったら
+    audio.src = keys[currentIndex].mp3;//１から再生
+});
+
+//ループ再生
+$("#repert_b").on("click",function(){
+    audio.loop = true;
 });
 
 
@@ -145,10 +156,9 @@ var volume = document.getElementById('volume');
 volume.addEventListener('change', function () {
     var volumeValue = (volume.value.length == 1) ? '0.0' + volume.value : '0.' +
     volume.value;
-    v.volume = volumeValue;
+    audio.volume = volumeValue;
 }, false);
-    
-    
+
     
 // //REC投稿イベント
 // $("#btn_rec").on("click",function(){

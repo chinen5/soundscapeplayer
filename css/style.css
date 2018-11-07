@@ -23,67 +23,86 @@ body{
 
 #title{
     color: #fff;
-    top: 390px;
-    left: 180px;
+    top: 440px;
+    left: 120px;
     position: absolute;
 }
 
 #tv{
     position: absolute;
-    top: 160px;
-    left: 163px;
-    width: 340px;
-    height: 250px;
+    top: 214px;
+    left: 110px;
+    width: 332px;
+    height: 215px;
 }
 
 #myMap{
     position: absolute;
-    top: 165px;
-    left: 550px;
-    width: 523px;
-    height: 238px;
+    top: 209px;
+    left: 532px;
+    width: 620px;
+    height: 250px;
 }
 
-#btn_x{
+/* プレイボタン */
+#play_b{
     position: absolute;
-    top: 555px;
-    left: 572px;
+    top: 553px;
+    left: 650px;
 }
 
-#btn_y{
+/* つぎへボタン */
+#next_b{
     position: absolute;
-    top: 555px;
-    left: 807px;
+    top: 553px;
+    left: 590px;
 }
 
-#btn_base{
+/* ポーズボタン */
+#pause_b{
     position: absolute;
-    top: 538px;
-    left: 292px;
+    top: 553px;
+    left: 710px;
 }
 
-#btn_tre{
+/* 戻るボタン */
+#rev_b{
     position: absolute;
-    top: 538px;
-    left: 417px;
+    top: 553px;
+    left: 529px;
+}
+
+/* recボタン */
+#rec{
+    position: absolute;
+    top: 553px;
+    left: 832px;
+}
+
+/* リピートボタン */
+#repert_b{
+    position: absolute;
+    top: 553px;
+    left: 772px;
 }
 
 #btn_autoplay{
     position: absolute;
-    top: 710px;
-    left: 305px;
+    top: 573px;
+    left: 381px;
 }
 
-#btn_rec{
+/* パワーボタン */
+#power_b{
     position: absolute;
-    top: 710px;
-    left: 427px;
+    top: 573px;
+    left: 244px;
 }
 
 #btn_vol{
     position: absolute;
-    top: 701px;
-    left: 1005px;
+    top: 557px;
+    left: 918px;
 }
 
 #meter{
@@ -92,6 +111,35 @@ body{
     left: 976px;
 }
 
+
+#volume{
+    position: absolute;
+    top: 568px;
+    left: 917px;
+}
+/* 棒の部分 */
+input[type="range"] {
+    -webkit-appearance:none;
+    width: 215px;
+    height: 5px;
+    background: #000;
+    /* box-shadow: 0 0 10px #666; */
+    border-radius: 50px;
+}
+/* たまの部分 */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #C0C0C0;
+    width: 20px;
+    height: 31px;
+    border-radius: 3px;
+}
+/* input[type="range"]::-webkit-slider-thumb:hover {
+    background: #999;
+} */
+/* input[type="range"]::-webkit-slider-thumb:active {
+    background: #fefefe;
+} */
 
 
 /* topココカラ  ///////////////////////////////////// */
