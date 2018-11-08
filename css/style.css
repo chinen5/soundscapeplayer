@@ -5,14 +5,27 @@ body{
     font-weight: bold;
     letter-spacing: 0.02em;
     user-select: none;
-    background-color: black;
+    background-color: #696969;
+    /* width:700px; */
     /* color: #fff; */
 }
 
+h1{
+    position: absolute;
+    font-size: 60px;
+    font: bold; 
+    padding-left: 143px;
+    margin-top: 40px;
+}
+
+
 #hoge{
     /* position: relative; */
-    padding: 50px;
+    padding-top: 50px;
+    padding-left: 135px;
     position: relative;
+    margin-right: auto;
+    margin-left : auto;
     /* top: 50px;
     left: 50px; */
     /* width:100%;
@@ -24,14 +37,14 @@ body{
 #title{
     color: #fff;
     top: 440px;
-    left: 120px;
+    left: 205px;
     position: absolute;
 }
 
 #tv{
     position: absolute;
     top: 214px;
-    left: 110px;
+    left: 195px;
     width: 332px;
     height: 215px;
 }
@@ -39,7 +52,7 @@ body{
 #myMap{
     position: absolute;
     top: 209px;
-    left: 532px;
+    left: 617px;
     width: 620px;
     height: 250px;
 }
@@ -48,61 +61,61 @@ body{
 #play_b{
     position: absolute;
     top: 553px;
-    left: 650px;
+    left: 735px;
 }
 
 /* つぎへボタン */
 #next_b{
     position: absolute;
     top: 553px;
-    left: 590px;
+    left: 675px;
 }
 
 /* ポーズボタン */
 #pause_b{
     position: absolute;
     top: 553px;
-    left: 710px;
+    left: 795px;
 }
 
 /* 戻るボタン */
 #rev_b{
     position: absolute;
     top: 553px;
-    left: 529px;
+    left: 614px;
 }
 
 /* recボタン */
 #rec{
     position: absolute;
     top: 553px;
-    left: 832px;
+    left: 917px;
 }
 
 /* リピートボタン */
 #repert_b{
     position: absolute;
     top: 553px;
-    left: 772px;
+    left: 857px;
 }
 
 #btn_autoplay{
     position: absolute;
     top: 573px;
-    left: 381px;
+    left: 466px;
 }
 
 /* パワーボタン */
 #power_b{
     position: absolute;
     top: 573px;
-    left: 244px;
+    left: 329px;
 }
 
 #btn_vol{
     position: absolute;
     top: 557px;
-    left: 918px;
+    left: 1003px;
 }
 
 #meter{
@@ -115,7 +128,7 @@ body{
 #volume{
     position: absolute;
     top: 568px;
-    left: 917px;
+    left: 1002px;
 }
 /* 棒の部分 */
 input[type="range"] {
@@ -129,7 +142,7 @@ input[type="range"] {
 /* たまの部分 */
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    background: #C0C0C0;
+    background: #606060;
     width: 20px;
     height: 31px;
     border-radius: 3px;
@@ -206,8 +219,87 @@ input[type="range"]::-webkit-slider-thumb {
 /* topココマデ  ///////////////////////////////////// */
 /* RECココカラ  ///////////////////////////////////// */
 .recbody{
-    background-color: #fff;
-    /* color: #fff; */
+    font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "ＭＳ ゴシック", sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+    user-select: none;
+    /* background-color: #fff; */
+    background-color: #696969;
+    /* background-color: black; */
+    color: #000;
+}
+
+.dialog-content{
+    margin-top: 40px;
+    text-align: center;
+    /* display: flex;
+    flex-wrap: wrap;
+    width: 386px;
+    height: 36px;
+    /* margin: 0 0 24px; */
+    /* white-space: nowrap; */ 
+}
+
+/* p{
+    padding: 10px;
+} */
+
+.btn-primary{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    width: 100px;
+    padding: 8px 0;
+    background-color: #000000;
+    margin: 40px auto 0;
+    text-align: center;
+    border: none;
+}
+
+/* 
+.form-wrapper{
+    width: 600px;
+    font-size: 1.4rem;
+    margin: auto;
+    color: #000;
+    text-align: center;
+}
+
+.form-item{
+    display: flex;
+    flex-wrap: wrap;
+    width: 386px;
+    height: 36px;
+    margin: 0 0 24px;
+    white-space: nowrap;
+}
+.form-inner{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 40px;
+} */
+
+.form-title{
+    text-align: center;
+    /* display: block; */
+    /* width: 118px; */
+    height: 18px;
+    padding: 10px 0 5px 0;
+}
+
+.form{
+    margin-left: 80px;
+    /* padding: 10px 0 0 0; */
+}
+
+.title_rec{
+    font: bold;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 30px;
 }
 
 /* .dialog {

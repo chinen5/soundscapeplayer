@@ -54,8 +54,17 @@ function addContact(){
         mp3:mp3url,
         photo:PhotoUrl
     });
-    
+
 };
+
+
+$("#submit").on("click",function(){
+    document.location.href = "index.html";
+});
+
+function frameClick() {
+    document.location.href = "http://www.ipentec.com";
+  }
 
 
 let PhotoUrl = "";
@@ -63,7 +72,7 @@ console.log(PhotoUrl);
     
     
     
-    
+
 // Firebaseにアップロードする
 var uploader = document.getElementById("uploader");
 var photofileButton = document.getElementById("photofileButton");

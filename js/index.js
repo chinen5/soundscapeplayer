@@ -10,6 +10,13 @@ var config = {
 firebase.initializeApp(config);
 
 
+function onn() {
+    $('#tv').hide();
+    $('#myMap').hide();
+};
+// MAP 中 ⼼ 座 標 を 取得 
+// let center = map.getCenter();
+
 
 //autoplay再生イベント
 let recclick = true;//クリックカウント
@@ -51,7 +58,7 @@ audio.addEventListener("play", function() {
     // });
     // map.entities.push(playpin);
     map.setView({ 
-        mapTypeId: Microsoft.Maps.MapTypeId.canvasLight,
+        mapTypeId: Microsoft.Maps.MapTypeId.aerial,
         center: new Microsoft.Maps.Location(playido,playkeido ),
         zoom: 15
     }); 
@@ -60,12 +67,6 @@ audio.addEventListener("play", function() {
 
 // console.log(playido);
 
-audio.addEventListener("ended", function() {
-    if (autoplaying) {
-        currentIndex = (currentIndex + 1) % keys.length;//再生が終わったら
-        audio.src = keys[currentIndex].mp3;//１から再生
-    }
-}, false);
 
 $("#btn_autoplay").on("click",function(){
     if (!autoplaying) {//再生していなければ
@@ -92,6 +93,46 @@ $("#btn_autoplay").on("click",function(){
         // $('btn_autoplay').offset({top: -25});
     }
 })
+
+
+
+audio.addEventListener("ended", function() {
+    if (autoplaying) {
+        currentIndex = (currentIndex + 1) % keys.length;//再生が終わったら
+        audio.src = keys[currentIndex].mp3;//１から再生
+    }
+}, false);
+let powerclilk = true;
+
+$("#power_b").on("click",function(){
+    if(powerclilk == true){
+        console.log("はろー");
+        init();
+        $('#tv').show();
+        $('#myMap').show();
+        $('#title').show();
+        powerclilk = false;
+        audio.pause();
+        $("#power_b").offset(function(index, coords){
+            return {
+                top: coords.top + -43,
+                };
+        });
+    }else{
+        $('#tv').hide();
+        $('#myMap').hide();
+        $('#title').hide();
+        powerclilk = true;
+        $("#power_b").offset(function(index, coords){
+            return {
+                top: coords.top + +43,
+                };
+        });
+        console.log(powerclilk);
+    }
+        // $('btn_autoplay').offset({top: -25});
+    }
+)
 
 let btnclick = 0;
 
@@ -147,6 +188,11 @@ $("#rev_b").on("click",function(){
 //ループ再生
 $("#repert_b").on("click",function(){
     audio.loop = true;
+});
+
+//保存ページへ転送
+$("#rec").on("click",function(){
+    document.location.href = "rec.html";
 });
 
 
@@ -306,8 +352,8 @@ let keido = "";
 function GetMap() {
         map = new Microsoft.Maps.Map('#myMap', {
         center: new Microsoft.Maps.Location(35.3622222, 138.7313889), 
-        mapTypeId: Microsoft.Maps.MapTypeId.canvasLight,//
-        zoom: 16
+        mapTypeId: Microsoft.Maps.MapTypeId.aerial,//
+        zoom: 4
     });
     // MAP 中 ⼼ 座 標 を 取得 
     // let center = map.getCenter();

@@ -9,25 +9,30 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="recbody" onload="recinit()">
-    <!-- <div class="dialog" id="sample-dialog">
-        <div class="dialog-header">
-            <span class="dialog-title">投稿フォーム</span>
-            <button type="button" class="dialog-close">×</button>
-        </div> -->
+    <div class="title_rec">Soundscape Player</div>
+    <div class="form-wrapper">
         <div class="dialog-content">
-            <p>なまえ</p>
-            <input type="text" name="name" id="name" maxlength="8" value="">
-            <p>一言コメント</p>
-            <input type="text" name="koment" id="koment" maxlength="12" value="">
-            <p>録音場所の写真</p>
-            <progress value="0" max="100" id="uploader">0%</progress>
-            <input type="file" name="photo" id="photofileButton" accept="image/*"/>
-            <p>録音データ</p>
-            <progress value="0" max="100" id="otouploader">0%</progress>
-            <input type="file" name="mp3" id="mp3fileButton" accept="audio/*" capture="microphone"/>
-            <!-- <input type="submit" value="実行する"> -->
-            <a href="#" class="btn-primary" id="submit" onclick="addContact()">送信</a>
+           <dl class="form-inner">
+                <dt class="form-title">名前</dt>
+                <dd class="">
+                <input type="text" name="name" id="name" maxlength="8" value=""></dd>
+                <dt class="form-title">コメント</dt>
+                <dd class="">
+                <input type="text" name="koment" id="koment" maxlength="12" value=""></dd>
+                <dt class="form-title">録音場所の写真</dt>
+                <dd class="">
+                <progress value="0" max="100" id="uploader">0%</progress></dd>
+                <div class="form">
+                <input type="file" name="photo" id="photofileButton" accept="image/*"/></div>
+                <dt class="form-title">録音データ</dt>
+                <dd class="">
+                <progress value="0" max="100" id="otouploader">0%</progress></dd>
+                <div class="form">
+                <input type="file" name="mp3" id="mp3fileButton" accept="audio/*" capture="microphone"/></div>
+                <a href="#" class="btn-primary" id="submit" onclick="addContact()">送信</a>
+           </dl> 
         </div>
+    </div>
     <!-- </div> -->
 </body>
 <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
