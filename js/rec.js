@@ -8,41 +8,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//REC投稿イベント
-// function recinit(){
-//     if(recclick==true){
-//         $("#btn_rec").offset(function(coords){
-//         return {
-//             top: coords.top + -25,
-//             };
-//         });
-//         recclick = false;
-//         getPosition();
-//         //leftの値 = (ウィンドウ幅 -コンテンツ幅) ÷ 2
-//         var leftPosition = (($(window).width() - $("#sample-dialog").outerWidth(true)) / 2);
-//         //CSSを変更
-//         $("#sample-dialog").css({"left": leftPosition + "px"});
-//         //ダイアログを表示する
-//         $("#sample-dialog").show();
-        
-//         //閉じるボタンで非表示
-//         $(".dialog-close").on("click", function(){
-//         $(this).parents(".dialog").hide();
-//         });
-//     }else{
-//         $("#btn_rec").offset(function(coords){
-//         return {
-//             top: coords.top + 25,
-//             };
-//         });
-//         recclick = true;
-//     }
-// });
-
-
-
-
-
 //firebaseへデータ送信
 function addContact(){
 //users参照
@@ -54,25 +19,16 @@ function addContact(){
         mp3:mp3url,
         photo:PhotoUrl
     });
-
 };
 
-
-$("#submit").on("click",function(){
-    document.location.href = "index.html";
-});
-
-function frameClick() {
-    document.location.href = "http://www.ipentec.com";
-  }
-
+$('#submit').click(function() {
+    setTimeout(function(){
+      window.location.href = "index.html";
+    }, 3000); 
+  });
 
 let PhotoUrl = "";
-console.log(PhotoUrl);
     
-    
-    
-
 // Firebaseにアップロードする
 var uploader = document.getElementById("uploader");
 var photofileButton = document.getElementById("photofileButton");

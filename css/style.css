@@ -6,8 +6,6 @@ body{
     letter-spacing: 0.02em;
     user-select: none;
     background-color: #696969;
-    /* width:700px; */
-    /* color: #fff; */
 }
 
 h1{
@@ -20,18 +18,11 @@ h1{
 
 
 #hoge{
-    /* position: relative; */
     padding-top: 50px;
     padding-left: 135px;
     position: relative;
     margin-right: auto;
     margin-left : auto;
-    /* top: 50px;
-    left: 50px; */
-    /* width:100%;
-    max-width: 100%;
-    height: auto; */
-    /* background-size: cover */
 }
 
 #title{
@@ -147,13 +138,6 @@ input[type="range"]::-webkit-slider-thumb {
     height: 31px;
     border-radius: 3px;
 }
-/* input[type="range"]::-webkit-slider-thumb:hover {
-    background: #999;
-} */
-/* input[type="range"]::-webkit-slider-thumb:active {
-    background: #fefefe;
-} */
-
 
 /* topココカラ  ///////////////////////////////////// */
 .topbody{
@@ -232,17 +216,7 @@ input[type="range"]::-webkit-slider-thumb {
 .dialog-content{
     margin-top: 40px;
     text-align: center;
-    /* display: flex;
-    flex-wrap: wrap;
-    width: 386px;
-    height: 36px;
-    /* margin: 0 0 24px; */
-    /* white-space: nowrap; */ 
 }
-
-/* p{
-    padding: 10px;
-} */
 
 .btn-primary{
     appearance: none;
@@ -259,28 +233,6 @@ input[type="range"]::-webkit-slider-thumb {
     border: none;
 }
 
-/* 
-.form-wrapper{
-    width: 600px;
-    font-size: 1.4rem;
-    margin: auto;
-    color: #000;
-    text-align: center;
-}
-
-.form-item{
-    display: flex;
-    flex-wrap: wrap;
-    width: 386px;
-    height: 36px;
-    margin: 0 0 24px;
-    white-space: nowrap;
-}
-.form-inner{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 0 40px;
-} */
 
 .form-title{
     text-align: center;
@@ -301,48 +253,5 @@ input[type="range"]::-webkit-slider-thumb {
     margin-top: 50px;
     font-size: 30px;
 }
-
-/* .dialog {
-    overflow: hidden;
-    position: absolute;
-    top: 30%;
-    height: auto;
-    width: 300px;
-    display: none;
-    border:1px solid #aaa;
-    z-index:1000;
-  }
-  .dialog-header {
-    border: 1px solid #aaa;
-    background: #cccccc;
-    color: #222222;
-    font-weight: bold;
-    overflow: hidden;
-    padding:5px;
-  }
-  .dialog-title {
-    float: left;
-  }
-  .dialog-close {
-    float: right;
-    border: 1px solid #d3d3d3;
-    background: #e6e6e6;
-    font-weight: normal;
-    color: #555555;
-  } */
-  /* .dialog-content {
-    position: relative;
-    border: 0;
-    padding: .5em 1em;
-    background: #fff;
-    overflow: auto;
-    width: auto;
-    height: auto;
-  }
-
-
-#sample-dialog{
-    background-color: #fff;
-} */
 
 /* RECココマデ  ///////////////////////////////////// */
