@@ -24,7 +24,7 @@ function addContact(){
 $('#submit').click(function() {
     setTimeout(function(){
       window.location.href = "index.html";
-    }, 3000); 
+    }, 5000); 
   });
 
 let PhotoUrl = "";
