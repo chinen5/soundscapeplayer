@@ -11,31 +11,39 @@ body{
 h1{
     position: absolute;
     font-size: 60px;
-    font: bold; 
-    padding-left: 143px;
+    font: bold;
+    left: 0;
     margin-top: 40px;
 }
 
+.setumei{
+    position: absolute;
+    left: 0;
+    margin-top: 120px;
+}
 
-#hoge{
-    padding-top: 50px;
-    padding-left: 135px;
+.relative{
+    width: 1140px;
     position: relative;
-    margin-right: auto;
-    margin-left : auto;
+    margin: auto;
+}
+
+
+#base{
+    padding-top: 50px;
 }
 
 #title{
     color: #fff;
     top: 440px;
-    left: 205px;
+    left: 70px;
     position: absolute;
 }
 
 #tv{
     position: absolute;
     top: 214px;
-    left: 195px;
+    left: 60px;
     width: 332px;
     height: 215px;
 }
@@ -43,7 +51,7 @@ h1{
 #myMap{
     position: absolute;
     top: 209px;
-    left: 617px;
+    left: 482px;
     width: 620px;
     height: 250px;
 }
@@ -52,74 +60,74 @@ h1{
 #play_b{
     position: absolute;
     top: 553px;
-    left: 735px;
+    left: 600px;
 }
 
 /* つぎへボタン */
 #next_b{
     position: absolute;
     top: 553px;
-    left: 675px;
+    left: 540px;
 }
 
 /* ポーズボタン */
 #pause_b{
     position: absolute;
     top: 553px;
-    left: 795px;
+    left: 660px;
 }
 
 /* 戻るボタン */
 #rev_b{
     position: absolute;
     top: 553px;
-    left: 614px;
+    left: 479px;
 }
 
 /* recボタン */
 #rec{
     position: absolute;
     top: 553px;
-    left: 917px;
+    left: 782px;
 }
 
 /* リピートボタン */
 #repert_b{
     position: absolute;
     top: 553px;
-    left: 857px;
+    left: 722px;
 }
 
 #btn_autoplay{
     position: absolute;
     top: 573px;
-    left: 466px;
+    left: 331px;
 }
 
 /* パワーボタン */
 #power_b{
     position: absolute;
     top: 573px;
-    left: 329px;
+    left: 194px;
 }
 
 #btn_vol{
     position: absolute;
     top: 557px;
-    left: 1003px;
+    left: 868px;
 }
 
 #meter{
     position: absolute;
     top: 302px;
-    left: 976px;
+    left: 841px;
 }
 
 
 #volume{
     position: absolute;
     top: 568px;
-    left: 1002px;
+    left: 867px;
 }
 /* 棒の部分 */
 input[type="range"] {

@@ -10,33 +10,39 @@
 </head>
 <body onload="onn()">
     <!-- 本体&ボタン描画スタート -->
-    <h1>Soundscape Player</h1>
-    <img id="hoge" src="svg/newbase.svg" preserveAspectRatio="none" width="1140" height="auto">
-    <img id="play_b" src="svg/play.svg" preserveAspectRatio="none" width="40" height="auto">
-    <img id="next_b" src="svg/next.svg" width="40" height="auto">
-    <img id="pause_b" src="svg/pause.svg" width="40" height="auto">
-    <img id="rev_b" src="svg/rev.svg" width="40" height="auto">
-    <img id="rec" src="svg/rec.svg" width="40" height="auto" >
-    <img id="repert_b" src="svg/repert.svg" width="40" height="auto">
-    <img id="btn_autoplay" src="svg/btn_autoplay.svg" width="46" height="auto">
-    <img id="power_b" src="svg/btn_rec.svg" width="46" height="auto">
-    <input type="range" id="volume" value="50" min="0" max="99">
-    <!-- 本体&ボタン描画おわり -->
+    <!-- <h1>Soundscape Player</h1> -->
+    <div class="relative">
+        <h1>Soundscape Player</h1>
+        <p class="setumei">・POWERをON.<br>・AUTOPLAYもしくはPLAYで再生.</p>
+        <div class="base">
+            <img id="base" src="svg/newbase.svg" preserveAspectRatio="none" width="1140" height="auto">
+        </div>
+        <img id="play_b" src="svg/play.svg" preserveAspectRatio="none" width="40" height="auto">
+        <img id="next_b" src="svg/next.svg" width="40" height="auto">
+        <img id="pause_b" src="svg/pause.svg" width="40" height="auto">
+        <img id="rev_b" src="svg/rev.svg" width="40" height="auto">
+        <img id="rec" src="svg/rec.svg" width="40" height="auto" >
+        <img id="repert_b" src="svg/repert.svg" width="40" height="auto">
+        <img id="btn_autoplay" src="svg/btn_autoplay.svg" width="46" height="auto">
+        <img id="power_b" src="svg/btn_rec.svg" width="46" height="auto">
+        <input type="range" id="volume" value="50" min="0" max="99">
+        <!-- 本体&ボタン描画おわり -->
 
-    <!-- TV部分反映スタート -->
-    <img id="tv" src="img/IMG_846011.gif">
-    <p id="title"></p>
-    <!-- 現在（秒）：<span id="ichi">0</span><br>
-    全体（秒）：<span id="nagasa"></span><br> -->
-    <!-- <audio id="oto" controls preload="none" controls> -->
-    <audio id="oto">
-        <source src="">
-    </audio>
-    <!-- TV部分反映おわり -->
+        <!-- TV部分反映スタート -->
+        <img id="tv" src="img/IMG_846011.gif">
+        <p id="title"></p>
+        <!-- 現在（秒）：<span id="ichi">0</span><br>
+        全体（秒）：<span id="nagasa"></span><br> -->
+        <!-- <audio id="oto" controls preload="none" controls> -->
+        <audio id="oto">
+            <source src="">
+        </audio>
+        <!-- TV部分反映おわり -->
 
-    <!-- Mapスタート -->
-    <div id="myMap"></div>
-    <!-- Mapおわり -->
+        <!-- Mapスタート -->
+        <div id="myMap"></div>
+        <!-- Mapおわり -->
+        </div>
     </div>
 </body>
 
